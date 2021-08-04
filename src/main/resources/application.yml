@@ -1,18 +1,19 @@
 common:
-  ip: 127.0.0.1
-  username: root
-  password: admini
+  table-name: usercenter
+  ip: 192.168.88.2
+  username: usercenter
+  password: 1332@ANCH.com
 
 mybatis-plus:
   datasource:
-    schema-name: test
+    schema-name: ${common.table-name}
     db-type: mysql
     driver-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${common.ip}:3306/${mybatis-plus.datasource.schema-name}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${common.ip}:3306/${common.table-name}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: ${common.username}
     password: ${common.password}
   global-config:
-    output-dir: D:/demo # 生成文件的输出目录
+    output-dir: D:/Workspace/JavaWorkspace/practice/personal-platform/business-center/demo-business/src/main/java # 生成文件的输出目录
     author: H.Yang # 作者
     date-type: only_date # 日期类型的字段使用哪个类型，默认是 java8的 日期类型，此处改为 java.util.date
     file-override: true # 是否覆盖 已存在文件，默认 false 不覆盖
@@ -32,20 +33,20 @@ mybatis-plus:
     service: service
     service-impl: service.impl
     mapper: mapper
-    entity: entity
+    entity: model
     xml: mapper.xml
   strategy-config:
     naming: underline_to_camel # 表名生成策略，下划线转驼峰命名
     column-naming: underline_to_camel # 数据库表字段映射到实体的命名策略, 未指定按照 naming 执行
     entity-lombok-model: true # 是否启用 lombok，默认 false
     entity-table-field-annotation-enable: false # 生成的字段 是否添加注解，默认false
-    include: strategy # 需要包含的表名，允许正则表达式（与exclude二选一配置）
+    #    include: strategy # 需要包含的表名，允许正则表达式（与exclude二选一配置）
     capital-mode: true # 全局大写命名 oracle 注意
   #    table-prefix: # 表前缀，配置后 生成的的代码都会把前缀去掉
   screw-config:
-    file-name: 数据库设计说明文档 # 自定义文件名称
+    file-name: USERCENTER-数据库设计说明文档 # 自定义文件名称
     version: 1.1 # 版本
-    description: 数据库设计说明文档 # 描述
+    description: USERCENTER-数据库设计说明文档 # 描述
     file-output-dir: D:/demo # 路径
     open: false # 是否打开目录
     file-type: html # 文件类型

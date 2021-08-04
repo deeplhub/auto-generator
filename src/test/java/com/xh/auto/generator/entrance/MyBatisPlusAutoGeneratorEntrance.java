@@ -1,9 +1,7 @@
 package com.xh.auto.generator.entrance;
 
 
-import cn.hutool.json.JSONUtil;
 import com.xh.auto.generator.code.MyBatisPlusAutoGenerator;
-import com.xh.auto.generator.code.ScrewAutoGenerator;
 import com.xh.auto.generator.properties.MybatisPlusGeneratorProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -29,26 +27,25 @@ public class MyBatisPlusAutoGeneratorEntrance {
     @Resource
     private MybatisPlusGeneratorProperties mybatisPlusGeneratorProperties;
 
+    /**
+     * 指定表生成
+     */
     @Test
     public void autoCodeGenerator() {
-        log.info(JSONUtil.toJsonStr(mybatisPlusGeneratorProperties));
-        String result = MyBatisPlusAutoGenerator.autoCodeGenerator(mybatisPlusGeneratorProperties);
+        String result = MyBatisPlusAutoGenerator.autoCodeGenerator(mybatisPlusGeneratorProperties, "big_data_search");
         log.info(result);
     }
 
+    /**
+     * 生成指定库的所有表
+     */
     @Test
     public void autoCodeGeneratorAllTable() {
-        log.info(JSONUtil.toJsonStr(mybatisPlusGeneratorProperties));
         Set<String> set = MyBatisPlusAutoGenerator.listTableName(mybatisPlusGeneratorProperties.getDatasource());
         String result = MyBatisPlusAutoGenerator.autoCodeGenerator(mybatisPlusGeneratorProperties, set);
         log.info(result);
 
     }
 
-    @Test
-    public void autoScrewGeneratorScrew() {
-        String result = ScrewAutoGenerator.autoScrewGeneratorScrew(mybatisPlusGeneratorProperties);
-        log.info(result);
-    }
 
 }

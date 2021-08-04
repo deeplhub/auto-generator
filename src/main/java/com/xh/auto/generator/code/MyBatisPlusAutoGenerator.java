@@ -27,6 +27,12 @@ public class MyBatisPlusAutoGenerator {
     // 代码生成器
     private static AutoGenerator mpg = new AutoGenerator();
 
+    /**
+     * 自动生成代码
+     *
+     * @param properties 配置对象
+     * @return
+     */
     public static String autoCodeGenerator(MybatisPlusGeneratorProperties properties) {
         try {
             MyBatisPlusAutoGenerator generator = new MyBatisPlusAutoGenerator();
@@ -38,7 +44,6 @@ public class MyBatisPlusAutoGenerator {
             mpg.setPackageInfo(properties.getPackageConfig());
             // 策略配置
             mpg.setStrategy(properties.getStrategyConfig());
-            mpg.setStrategy(properties.getStrategyConfig());
             mpg.execute();
 
             return "SUCCESS";
@@ -48,6 +53,43 @@ public class MyBatisPlusAutoGenerator {
         }
     }
 
+    /**
+     * 自动生成代码
+     *
+     * @param properties 配置对象
+     * @param tableName  表名称
+     * @return
+     */
+    public static String autoCodeGenerator(MybatisPlusGeneratorProperties properties, String tableName) {
+        try {
+            MyBatisPlusAutoGenerator generator = new MyBatisPlusAutoGenerator();
+            // 全局配置
+            mpg.setGlobalConfig(generator.globalConfig(properties.getGlobalConfig()));
+            // 数据源配置
+            mpg.setDataSource(properties.getDatasource());
+            // 包配置
+            mpg.setPackageInfo(properties.getPackageConfig());
+
+            Set<String> tableNames = new HashSet<>();
+            tableNames.add(tableName);
+            // 策略配置
+            mpg.setStrategy(generator.strategyConfig(properties.getStrategyConfig(), tableNames));
+            mpg.execute();
+
+            return "SUCCESS";
+        } catch (Exception e) {
+            log.error("自动生成代码失败", e);
+            return "ERROR";
+        }
+    }
+
+    /**
+     * 自动生成代码
+     *
+     * @param properties 配置对象
+     * @param tableNames 表名称
+     * @return
+     */
     public static String autoCodeGenerator(MybatisPlusGeneratorProperties properties, Set<String> tableNames) {
         try {
             MyBatisPlusAutoGenerator generator = new MyBatisPlusAutoGenerator();
@@ -89,6 +131,13 @@ public class MyBatisPlusAutoGenerator {
         return strategyConfig;
     }
 
+
+    /**
+     * 获取当前数据库中所有表
+     *
+     * @param datasource 数据源配置
+     * @return
+     */
     public static Set<String> listTableName(DataSourceConfig datasource) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
