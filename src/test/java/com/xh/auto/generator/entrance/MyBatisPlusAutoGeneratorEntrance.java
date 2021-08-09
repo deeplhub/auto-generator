@@ -32,7 +32,7 @@ public class MyBatisPlusAutoGeneratorEntrance {
      */
     @Test
     public void autoCodeGenerator() {
-        String result = MyBatisPlusAutoGenerator.autoCodeGenerator(mybatisPlusGeneratorProperties, "big_data_search");
+        String result = MyBatisPlusAutoGenerator.autoCodeGenerator(mybatisPlusGeneratorProperties, "cloudlink_rates");
         log.info(result);
     }
 
